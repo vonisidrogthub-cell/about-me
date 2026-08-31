@@ -1,0 +1,1592 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>My Spotify About Me</title>
+
+  <style>
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #121212;
+      color: white;
+    }
+
+    /* =========================
+       NAVIGATION
+    ========================= */
+
+    nav {
+      background: #000;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 8%;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .logo span {
+      color: #1db954;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 25px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: #1db954;
+    }
+
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      min-height: 85vh;
+      padding: 80px 10%;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      gap: 70px;
+
+      background:
+        linear-gradient(
+          to bottom,
+          #1db954,
+          #121212 70%
+        );
+    }
+
+    .profile-image {
+      width: 280px;
+      height: 280px;
+
+      object-fit: cover;
+
+      border-radius: 50%;
+
+      border: 6px solid #1db954;
+
+      box-shadow:
+        0 15px 40px rgba(0,0,0,0.6);
+    }
+
+    .hero-text {
+      max-width: 600px;
+    }
+
+    .small-title {
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: 13px;
+      margin-bottom: 15px;
+    }
+
+    .hero h1 {
+      font-size: 65px;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 span {
+      color: #1db954;
+    }
+
+    .hero p {
+      color: #d0d0d0;
+      line-height: 1.7;
+      font-size: 17px;
+      margin-bottom: 30px;
+    }
+
+
+    /* =========================
+       BUTTONS
+    ========================= */
+
+    .buttons {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 14px 28px;
+
+      border-radius: 30px;
+
+      text-decoration: none;
+
+      font-weight: bold;
+
+      transition: 0.3s;
+    }
+
+    .green-btn {
+      background: #1db954;
+      color: black;
+    }
+
+    .green-btn:hover {
+      background: #1ed760;
+      transform: scale(1.05);
+    }
+
+    .dark-btn {
+      background: #242424;
+      color: white;
+
+      border: 1px solid #666;
+    }
+
+    .dark-btn:hover {
+      background: white;
+      color: black;
+    }
+
+
+    /* =========================
+       SECTIONS
+    ========================= */
+
+    section {
+      padding: 80px 10%;
+    }
+
+    section h2 {
+      font-size: 38px;
+      margin-bottom: 30px;
+    }
+
+    section h2 span {
+      color: #1db954;
+    }
+
+
+    /* =========================
+       ABOUT
+    ========================= */
+
+    .about-box {
+      background: #181818;
+
+      padding: 35px;
+
+      border-radius: 15px;
+
+      line-height: 1.8;
+
+      color: #ccc;
+
+      transition: 0.3s;
+    }
+
+    .about-box:hover {
+      background: #242424;
+    }
+
+
+    /* =========================
+       FAVORITES
+    ========================= */
+
+    .card-container {
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(auto-fit, minmax(180px, 1fr));
+
+      gap: 20px;
+    }
+
+    .card {
+
+      background: #181818;
+
+      padding: 25px;
+
+      border-radius: 12px;
+
+      transition: 0.3s;
+    }
+
+    .card:hover {
+
+      background: #282828;
+
+      transform: translateY(-8px);
+    }
+
+    .card-icon {
+      font-size: 45px;
+
+      margin-bottom: 20px;
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      color: #aaa;
+
+      font-size: 14px;
+
+      line-height: 1.6;
+    }
+
+
+    /* =========================
+       MUSIC PLAYER
+    ========================= */
+
+    .music-section {
+      background: #121212;
+    }
+
+    .player {
+
+      max-width: 700px;
+
+      margin: auto;
+
+      background:
+        linear-gradient(
+          145deg,
+          #242424,
+          #121212
+        );
+
+      padding: 35px;
+
+      border-radius: 20px;
+
+      box-shadow:
+        0 20px 50px rgba(0,0,0,0.5);
+    }
+
+
+    /* ALBUM */
+
+    .album-container {
+
+      text-align: center;
+
+      margin-bottom: 25px;
+    }
+
+    .album-cover {
+
+      width: 260px;
+      height: 260px;
+
+      object-fit: cover;
+
+      border-radius: 10px;
+
+      box-shadow:
+        0 15px 40px rgba(0,0,0,0.7);
+
+      transition: 0.3s;
+    }
+
+    .album-cover.playing {
+
+      transform: scale(1.03);
+    }
+
+
+    /* SONG INFO */
+
+    .song-details {
+
+      text-align: center;
+
+      margin-bottom: 25px;
+    }
+
+    .song-details h3 {
+
+      font-size: 23px;
+
+      margin-bottom: 8px;
+    }
+
+    .song-details p {
+
+      color: #aaa;
+
+      font-size: 15px;
+    }
+
+
+    /* PROGRESS */
+
+    .progress-area {
+
+      margin-bottom: 20px;
+    }
+
+    #progress {
+
+      width: 100%;
+
+      height: 5px;
+
+      cursor: pointer;
+
+      accent-color: #1db954;
+    }
+
+    .time {
+
+      display: flex;
+
+      justify-content: space-between;
+
+      color: #aaa;
+
+      font-size: 12px;
+
+      margin-top: 6px;
+    }
+
+
+    /* PLAYER BUTTONS */
+
+    .player-controls {
+
+      display: flex;
+
+      justify-content: center;
+
+      align-items: center;
+
+      gap: 25px;
+
+      margin: 20px 0;
+    }
+
+    .control-button {
+
+      border: none;
+
+      background: transparent;
+
+      color: white;
+
+      font-size: 24px;
+
+      cursor: pointer;
+
+      transition: 0.2s;
+    }
+
+    .control-button:hover {
+
+      color: #1db954;
+
+      transform: scale(1.15);
+    }
+
+    .play-main {
+
+      width: 60px;
+      height: 60px;
+
+      background: #1db954;
+
+      color: black;
+
+      border: none;
+
+      border-radius: 50%;
+
+      font-size: 25px;
+
+      cursor: pointer;
+
+      transition: 0.2s;
+    }
+
+    .play-main:hover {
+
+      background: #1ed760;
+
+      transform: scale(1.08);
+    }
+
+
+    /* VOLUME */
+
+    .volume {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 10px;
+
+      justify-content: center;
+
+      margin-top: 15px;
+    }
+
+    #volume {
+
+      width: 120px;
+
+      accent-color: #1db954;
+    }
+
+
+    /* PLAYLIST */
+
+    .playlist {
+
+      margin-top: 35px;
+    }
+
+    .playlist h3 {
+
+      margin-bottom: 15px;
+    }
+
+    .playlist-item {
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      padding: 15px;
+
+      border-radius: 8px;
+
+      cursor: pointer;
+
+      transition: 0.3s;
+    }
+
+    .playlist-item:hover {
+
+      background: #282828;
+    }
+
+    .playlist-item.active {
+
+      background: #1db954;
+
+      color: black;
+    }
+
+    .playlist-info {
+
+      display: flex;
+
+      gap: 15px;
+
+      align-items: center;
+    }
+
+    .track-number {
+
+      width: 25px;
+
+      color: #aaa;
+    }
+
+    .playlist-item.active .track-number {
+
+      color: black;
+    }
+
+    .track-title {
+
+      font-weight: bold;
+    }
+
+    .track-artist {
+
+      font-size: 13px;
+
+      color: #aaa;
+
+      margin-top: 4px;
+    }
+
+    .playlist-item.active .track-artist {
+
+      color: #222;
+    }
+
+
+    /* =========================
+       CONTACT
+    ========================= */
+
+    .contact {
+
+      text-align: center;
+
+      background: #181818;
+    }
+
+    .contact p {
+
+      color: #aaa;
+
+      margin-bottom: 25px;
+    }
+
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+
+      background: black;
+
+      text-align: center;
+
+      padding: 25px;
+
+      color: #777;
+
+      font-size: 14px;
+    }
+
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 768px) {
+
+      nav ul {
+        display: none;
+      }
+
+      .hero {
+
+        text-align: center;
+
+        padding: 60px 7%;
+      }
+
+      .hero h1 {
+
+        font-size: 45px;
+      }
+
+      .profile-image {
+
+        width: 220px;
+
+        height: 220px;
+      }
+
+      .buttons {
+
+        justify-content: center;
+      }
+
+      .album-cover {
+
+        width: 220px;
+
+        height: 220px;
+      }
+
+      .player {
+
+        padding: 25px 18px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- =========================
+       NAVIGATION
+  ========================= -->
+
+  <nav>
+
+    <div class="logo">
+      My<span>Spotify</span>
+    </div>
+
+    <ul>
+
+      <li>
+        <a href="#home">Home</a>
+      </li>
+
+      <li>
+        <a href="#about">About</a>
+      </li>
+
+      <li>
+        <a href="#favorites">Favorites</a>
+      </li>
+
+      <li>
+        <a href="#music">Music</a>
+      </li>
+
+      <li>
+        <a href="#contact">Contact</a>
+      </li>
+
+    </ul>
+
+  </nav>
+
+
+
+  <!-- =========================
+       HOME
+  ========================= -->
+
+  <section class="hero" id="home">
+
+    <!-- CHANGE THIS IMAGE -->
+    <img
+      src="me.png"
+      class="profile-image"
+      alt="My Profile"
+    >
+
+    <div class="hero-text">
+
+      <div class="small-title">
+        Welcome to my profile
+      </div>
+
+      <!-- CHANGE YOUR NAME -->
+      <h1>
+        Hi, I'm
+        <span>Vonnieee</span>
+      </h1>
+
+      <p>
+
+        Welcome to my personal website!
+
+        This is a little space where I can
+        introduce myself, share my interests,
+        favorite things, and the music that
+        I enjoy listening to.
+
+      </p>
+
+      <div class="buttons">
+
+        <a
+          href="#about"
+          class="btn green-btn"
+        >
+          ▶ Know Me
+        </a>
+
+        <a
+          href="#music"
+          class="btn dark-btn"
+        >
+          ♫ My Music
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =========================
+       ABOUT ME
+  ========================= -->
+
+  <section id="about">
+
+    <h2>
+      About <span>Me</span>
+    </h2>
+
+    <div class="about-box">
+
+      <p>
+
+        Hello! My name is
+        <strong>Vonn</strong>.
+
+        I am a student who enjoys
+        listening to music, spending time
+        with friends, playing games,
+        watching movies, and learning
+        new things.
+
+      </p>
+
+      <br>
+
+      <p>
+
+        I created this website as a way
+        to introduce myself and share
+        some of the things that I enjoy.
+
+        Music is a big part of my everyday
+        life, so I decided to create this
+        website with a Spotify-inspired
+        design.
+
+      </p>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =========================
+       FAVORITES
+  ========================= -->
+
+  <section id="favorites">
+
+    <h2>
+      My <span>Favorites</span>
+    </h2>
+
+    <div class="card-container">
+
+
+      <div class="card">
+
+        <div class="card-icon">
+          🎵
+        </div>
+
+        <h3>
+          Music
+        </h3>
+
+        <p>
+          I enjoy listening to music
+          whenever I am relaxing,
+          studying, or travelling.
+        </p>
+
+      </div>
+
+
+
+      <div class="card">
+
+        <div class="card-icon">
+          🎮
+        </div>
+
+        <h3>
+          Gaming
+        </h3>
+
+        <p>
+          Playing games is one of my
+          favorite ways to relax and
+          have fun.
+        </p>
+
+      </div>
+
+
+
+      <div class="card">
+
+        <div class="card-icon">
+          🎬
+        </div>
+
+        <h3>
+          Movies
+        </h3>
+
+        <p>
+          I enjoy watching movies and
+          discovering interesting stories.
+        </p>
+
+      </div>
+
+
+
+      <div class="card">
+
+        <div class="card-icon">
+          🍕
+        </div>
+
+        <h3>
+          Food
+        </h3>
+
+        <p>
+          Good food and good company
+          can make any day better.
+        </p>
+
+      </div>
+
+
+
+      <div class="card">
+
+        <div class="card-icon">
+          📸
+        </div>
+
+        <h3>
+          Memories
+        </h3>
+
+        <p>
+          I love taking pictures and
+          keeping memories of special
+          moments.
+        </p>
+
+      </div>
+
+
+
+      <div class="card">
+
+        <div class="card-icon">
+          🌙
+        </div>
+
+        <h3>
+          Night Time
+        </h3>
+
+        <p>
+          Quiet nights, music, and
+          relaxing conversations are
+          some of my favorites.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =========================
+       MUSIC
+  ========================= -->
+
+  <section
+    class="music-section"
+    id="music"
+  >
+
+    <h2>
+      My <span>Music</span>
+    </h2>
+
+
+    <div class="player">
+
+
+      <!-- ALBUM COVER -->
+
+      <div class="album-container">
+
+        <img
+          id="albumCover"
+          src="abtu.png"
+          class="album-cover"
+          alt="Album Cover"
+        >
+
+      </div>
+
+
+      <!-- SONG INFORMATION -->
+
+      <div class="song-details">
+
+        <h3 id="About You">
+          About you
+        </h3>
+
+        <p id=" The 1975">
+          The 1975
+        </p>
+
+      </div>
+
+
+      <!-- AUDIO -->
+
+      <audio id="audio">
+        <source src="The 1975 - About You (Official).mp3" type="audio">
+      </audio>
+
+
+      <!-- PROGRESS -->
+
+      <div class="progress-area">
+
+        <input
+          type="range"
+          id="progress"
+          value="0"
+          min="0"
+          max="100"
+        >
+
+        <div class="time">
+
+          <span id="currentTime">
+            0:00
+          </span>
+
+          <span id="duration">
+            0:00
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <!-- CONTROLS -->
+
+      <div class="player-controls">
+
+        <button
+          class="control-button"
+          onclick="previousSong()"
+        >
+          ⏮
+        </button>
+
+
+        <button
+          class="play-main"
+          id="playButton"
+          onclick="playPause()"
+        >
+          ▶
+        </button>
+
+
+        <button
+          class="control-button"
+          onclick="nextSong()"
+        >
+          ⏭
+        </button>
+
+      </div>
+
+
+      <!-- VOLUME -->
+
+      <div class="volume">
+
+        <span>
+          🔊
+        </span>
+
+        <input
+          type="range"
+          id="volume"
+          min="0"
+          max="1"
+          step="0.01"
+          value="1"
+        >
+
+      </div>
+
+
+      <!-- PLAYLIST -->
+
+      <div class="playlist">
+
+        <h3>
+          My Playlist
+        </h3>
+
+
+        <div
+          class="playlist-item active"
+          onclick="selectSong(0)"
+        >
+
+          <div class="playlist-info">
+
+            <span class="track-number">
+              1
+            </span>
+
+            <div>
+
+              <div class="track-title">
+                My Favorite Song
+              </div>
+
+              <div class="track-artist">
+                My Favorite Artist
+              </div>
+
+            </div>
+
+          </div>
+
+          <span>
+            ▶
+          </span>
+
+        </div>
+
+
+
+        <div
+          class="playlist-item"
+          onclick="selectSong(1)"
+        >
+
+          <div class="playlist-info">
+
+            <span class="track-number">
+              2
+            </span>
+
+            <div>
+
+              <div class="track-title">
+                fallingforyou
+              </div>
+
+              <div class="track-artist">
+                The 1975
+              </div>
+
+            </div>
+
+          </div>
+
+          <span>
+            ▶
+          </span>
+
+        </div>
+
+
+
+        <div
+          class="playlist-item"
+          onclick="selectSong(2)"
+        >
+
+          <div class="playlist-info">
+
+            <span class="track-number">
+              3
+            </span>
+
+            <div>
+
+              <div class="track-title">
+                All I Need To Hear
+              </div>
+
+              <div class="track-artist">
+                The 1975
+              </div>
+
+            </div>
+
+          </div>
+
+          <span>
+            ▶
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =========================
+       CONTACT
+  ========================= -->
+
+  <section
+    class="contact"
+    id="contact"
+  >
+
+    <h2>
+      Let's <span>Connect</span>
+    </h2>
+
+    <p>
+      Thanks for visiting my website!
+    </p>
+
+
+    <div
+      class="buttons"
+      style="justify-content:center;"
+    >
+
+      <a
+        href="https://www.facebook.com/profile.php?id=61560364094884"
+        class="btn green-btn"
+      >
+        Facebook
+      </a>
+
+      <a
+        href="https://www.instagram.com/von.asfp/?hl=en"
+        class="btn dark-btn"
+      >
+        Instagram
+      </a>
+
+      <a
+        href="https://open.spotify.com/user/31gjwzzeudajtt3xw6icfrvw5sa4?si=jDFPzbuDRsqiSYgNKVAggA&utm_source=copy-link"
+        class="btn dark-btn"
+      >
+        Spotify
+      </a>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =========================
+       FOOTER
+  ========================= -->
+
+  <footer>
+
+    Made with ♫ by
+    <strong>Vonnn</strong>
+    | 2026
+
+  </footer>
+
+
+
+   
+
+  <script>
+
+
+    /* =========================
+       SONG LIST
+    ========================= */
+
+    const songs = [
+
+      {
+        title: "About You",
+        artist: "The 1975",
+        file: "song1.mp3",
+        cover: "album.jpg"
+      },
+
+      {
+        title: "fallingforyou",
+        artist: "The 1975",
+        file: "song2.mp3",
+        cover: "album.jpg"
+      },
+
+      {
+        title: "All I Need To Hear",
+        artist: "Third Artist",
+        file: "song3.mp3",
+        cover: "album.jpg"
+      }
+
+    ];
+
+
+    /* =========================
+       ELEMENTS
+    ========================= */
+
+    const audio =
+      document.getElementById("audio");
+
+    const playButton =
+      document.getElementById("playButton");
+
+    const progress =
+      document.getElementById("progress");
+
+    const currentTime =
+      document.getElementById("currentTime");
+
+    const duration =
+      document.getElementById("duration");
+
+    const songTitle =
+      document.getElementById("songTitle");
+
+    const artistName =
+      document.getElementById("artistName");
+
+    const albumCover =
+      document.getElementById("albumCover");
+
+    const volume =
+      document.getElementById("volume");
+
+    const playlistItems =
+      document.querySelectorAll(".playlist-item");
+
+
+    let currentSong = 0;
+
+
+    /* =========================
+       LOAD SONG
+    ========================= */
+
+    function loadSong(index) {
+
+      currentSong = index;
+
+      const song = songs[index];
+
+      audio.src = song.file;
+
+      songTitle.textContent =
+        song.title;
+
+      artistName.textContent =
+        song.artist;
+
+      albumCover.src =
+        song.cover;
+
+
+      playlistItems.forEach(
+        item => item.classList.remove("active")
+      );
+
+      playlistItems[index]
+        .classList.add("active");
+
+
+      progress.value = 0;
+
+      currentTime.textContent =
+        "0:00";
+
+      duration.textContent =
+        "0:00";
+    }
+
+
+    /* =========================
+       PLAY / PAUSE
+    ========================= */
+
+    function playPause() {
+
+      if (audio.paused) {
+
+        audio.play();
+
+        playButton.textContent =
+          "⏸";
+
+        albumCover.classList.add(
+          "playing"
+        );
+
+      } else {
+
+        audio.pause();
+
+        playButton.textContent =
+          "▶";
+
+        albumCover.classList.remove(
+          "playing"
+        );
+
+      }
+
+    }
+
+
+    /* =========================
+       NEXT SONG
+    ========================= */
+
+    function nextSong() {
+
+      currentSong++;
+
+      if (currentSong >= songs.length) {
+
+        currentSong = 0;
+
+      }
+
+      loadSong(currentSong);
+
+      audio.play();
+
+      playButton.textContent =
+        "⏸";
+
+      albumCover.classList.add(
+        "playing"
+      );
+
+    }
+
+
+    /* =========================
+       PREVIOUS SONG
+    ========================= */
+
+    function previousSong() {
+
+      currentSong--;
+
+      if (currentSong < 0) {
+
+        currentSong =
+          songs.length - 1;
+
+      }
+
+      loadSong(currentSong);
+
+      audio.play();
+
+      playButton.textContent =
+        "⏸";
+
+      albumCover.classList.add(
+        "playing"
+      );
+
+    }
+
+
+    /* =========================
+       SELECT SONG
+    ========================= */
+
+    function selectSong(index) {
+
+      loadSong(index);
+
+      audio.play();
+
+      playButton.textContent =
+        "⏸";
+
+      albumCover.classList.add(
+        "playing"
+      );
+
+    }
+
+
+    /* =========================
+       PROGRESS BAR
+    ========================= */
+
+    audio.addEventListener(
+      "timeupdate",
+      function() {
+
+        if (audio.duration) {
+
+          const progressPercent =
+            (audio.currentTime /
+            audio.duration) * 100;
+
+          progress.value =
+            progressPercent;
+
+          currentTime.textContent =
+            formatTime(
+              audio.currentTime
+            );
+
+        }
+
+      }
+    );
+
+
+    /* =========================
+       DURATION
+    ========================= */
+
+    audio.addEventListener(
+      "loadedmetadata",
+      function() {
+
+        duration.textContent =
+          formatTime(audio.duration);
+
+      }
+    );
+
+
+    /* =========================
+       CHANGE PROGRESS
+    ========================= */
+
+    progress.addEventListener(
+      "input",
+      function() {
+
+        if (audio.duration) {
+
+          audio.currentTime =
+            (progress.value / 100) *
+            audio.duration;
+
+        }
+
+      }
+    );
+
+
+    /* =========================
+       VOLUME
+    ========================= */
+
+    volume.addEventListener(
+      "input",
+      function() {
+
+        audio.volume =
+          volume.value;
+
+      }
+    );
+
+
+    /* =========================
+       AUTO NEXT
+    ========================= */
+
+    audio.addEventListener(
+      "ended",
+      function() {
+
+        nextSong();
+
+      }
+    );
+
+
+    /* =========================
+       FORMAT TIME
+    ========================= */
+
+    function formatTime(seconds) {
+
+      if (isNaN(seconds)) {
+
+        return "0:00";
+
+      }
+
+      const minutes =
+        Math.floor(seconds / 60);
+
+      const secs =
+        Math.floor(seconds % 60);
+
+      return minutes + ":" +
+        (secs < 10 ? "0" : "") +
+        secs;
+
+    }
+
+
+    /* =========================
+       START FIRST SONG
+    ========================= */
+
+    loadSong(0);
+
+
+  </script>
+
+
+</body>
+
+</html>
